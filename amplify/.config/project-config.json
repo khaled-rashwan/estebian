@@ -1,0 +1,17 @@
+{
+  "projectName": "estebian",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react-native",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "web-build",
+      "BuildCommand": "expo build:web",
+      "StartCommand": "expo start"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}

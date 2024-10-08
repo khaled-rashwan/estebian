@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-estebian-dev-91dee-authRole",
+      "UnauthRoleArn": "arn:aws:iam::503641682615:role/amplify-estebian-dev-91dee-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::503641682615:role/amplify-estebian-dev-91dee-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-estebian-dev-91dee-deployment",
+      "UnauthRoleName": "amplify-estebian-dev-91dee-unauthRole",
+      "StackName": "amplify-estebian-dev-91dee",
+      "StackId": "arn:aws:cloudformation:us-east-1:503641682615:stack/amplify-estebian-dev-91dee/b9f106c0-8530-11ef-94f8-0afff396ac6d",
+      "AmplifyAppId": "d28c3sq8rw1hvo"
+    }
+  }
+}

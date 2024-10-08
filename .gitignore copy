@@ -5,7 +5,6 @@ node_modules/
 
 # Expo
 .expo/
-.expo-shared/
 dist/
 web-build/
 
@@ -42,7 +41,7 @@ amplify_outputs*
 amplifyconfiguration*
 
 #amplify-do-not-edit-begin
-amplify/#current-cloud-backend
+amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
 amplify/mock-data
@@ -62,6 +61,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-
-# Visual Studio Code settings
-.vscode/
