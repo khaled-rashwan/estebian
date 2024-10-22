@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { View, Button, Text, StyleSheet, FlatList } from "react-native";
+import { View, Pressable, Text, StyleSheet, FlatList } from "react-native";
 
 import { generateClient } from "aws-amplify/data";
-import type { Schema } from "../amplify/data/resource";
+import type { Schema } from "../../amplify/data/resource";
 import { GraphQLError } from "graphql";
 const client = generateClient<Schema>();
 
-const TodoList = () => {
+const AnalyzeResults = () => {
   const dateTimeNow = new Date();
   const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
   const [errors, setErrors] = useState<GraphQLError>();
@@ -51,10 +51,19 @@ const TodoList = () => {
         ItemSeparatorComponent={() => (
           <View style={styles.listItemSeparator} />
         )}
-        ListEmptyComponent={() => <Text>The todo list is empty.</Text>}
+        ListEmptyComponent={() => <Text>القائمة فارغة</Text>}
         style={styles.listContainer}
       ></FlatList>
-      <Button onPress={createTodo} title="Create Todo" />
+      <Pressable
+        onPress={createTodo}
+        style={({ pressed }) => [
+          styles.button,
+          { backgroundColor: pressed ? "#1E90FF" : "#2196F3" }, // Feedback on press
+        ]}
+      >
+        <Text style={styles.buttonText}>بند جديد</Text>
+      </Pressable>
+
     </View>
   );
 };
@@ -70,29 +79,52 @@ const TodoItem = (todo: Schema["Todo"]["type"]) => (
     >
       {todo.content}
     </Text>
-    <Button
+    <Pressable
       onPress={async () => {
         await client.models.Todo.delete(todo);
       }}
-      title="Delete"
-    />
-    <Button
+      style={({ pressed }) => [
+        styles.button,
+        { backgroundColor: pressed ? "#ff6347" : "#ff4500" }, // Change color when pressed
+      ]}
+    >
+      <Text style={styles.buttonText}>مسح</Text>
+    </Pressable>
+
+    <Pressable
       onPress={() => {
         client.models.Todo.update({
           id: todo.id,
           isDone: !todo.isDone,
         });
       }}
-      title={todo.isDone ? "Undo" : "Done"}
-    />
+      style={({ pressed }) => [
+        styles.button,
+        { backgroundColor: pressed ? "#32cd32" : "#228b22" }, // Change color when pressed
+      ]}
+    >
+      <Text style={styles.buttonText}>{todo.isDone ? "إعادة" : "تم"}</Text>
+    </Pressable>
+
   </View>
 );
 
 const styles = StyleSheet.create({
+  button: {
+    padding: 10,
+    backgroundColor: "#2196F3",
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   todoItemContainer: { flexDirection: "row", alignItems: "center", padding: 8 },
   todoItemText: { flex: 1, textAlign: "center" },
   listContainer: { flex: 1, alignSelf: "stretch", padding:8 },
   listItemSeparator: { backgroundColor: "lightgrey", height: 2 },
 });
 
-export default TodoList;
+export default AnalyzeResults;
